@@ -4,6 +4,7 @@ Page Size: Determines the number of items to display on a single page.
 Current Page: Tracks which page is currently being viewed.
 Total Items: The total number of items in the dataset.
 Total Pages: Calculated by dividing the total number of items by the page size.
+
  It determines how many pages are needed to display all items.
 Approach to Implement Pagination:
 Fetching Data: Initially, fetch the data that you want to display, 
