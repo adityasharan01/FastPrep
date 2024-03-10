@@ -89,4 +89,39 @@ promise.then(v => {
 // In finally, the argument is always undefined because finally does not receive the promise's resolution or rejection value. Its primary use is for performing cleanup actions and it does not affect the value passed through the promise chain.
 
 
+// Question 6
+console.log("begins");
+setTimeout(() => {
+    console.log("setTimeout 1");
+    Promise.resolve().then(() => {
+        console.log("promise 1");
+    });
+}, 0);
+new Promise(function (resolve, reject) {
+    console.log("promise 2");
+    setTimeout(function () {
+        console.log("setTimeout 2");
+        resolve("resolve 1");
+    }, 0);
+}).then((res) => {
+    console.log("then 1");
+    setTimeout(() => {
+        console.log(res);
+    }, 0);
+});
+//output:
+// begins
+// promise 2
+// promise 1
+// then 1
+// setTimeout 1
+// setTimeout 2
+// resolve 1
+// Here's the corrected sequence of actions and the expected output:
+
+// Immediate Logging: The code logs "begins" immediately.
+// Registering setTimeout and Promise Operations: It then schedules a setTimeout callback and executes the executor function of a new promise, logging "promise 2".
+// Promise Resolution and setTimeout Callbacks: The event loop then checks the microtask queue(for promises) before the next event loop iteration for any timer callbacks.However, since promises and setTimeout callbacks are registered for future execution, JavaScript proceeds to the next operations.
+//     Microtasks(Promise.resolve().then and Promise Thenable): Microtask queue has higher priority than timer callbacks, so "promise 1" from the Promise.resolve().then and "then 1" from the new Promise resolution are logged next.It's worth noting that while the executor of the new promise is executed immediately, its .then method is not called until the promise is resolved, and the resolution happens in a setTimeout, making it asynchronous and allowing the "promise 1" to log before "then 1".
+// Macrotasks(setTimeout Callbacks): Finally, the event loop executes tasks in the timer queue, logging "setTimeout 1" and "setTimeout 2".The logging of "resolve 1" occurs in a setTimeout callback that is nested inside a.then method, making it execute last.
 
