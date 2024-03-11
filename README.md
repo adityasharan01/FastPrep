@@ -1,5 +1,6 @@
 # React + Vite
 
+[Image](https://github.com/adityasharan01/FastPrep/blob/master/src/assets/banner-img.jpg)
 Another Repo where all the concepts gets cleared : https://github.com/ishwarrimal/frontend-interview-preps/tree/main
 [Link](https://github.com/ishwarrimal/frontend-interview-preps/tree/main)
 
