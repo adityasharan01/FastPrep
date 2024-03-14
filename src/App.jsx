@@ -1,41 +1,20 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
-
-  const debounce = (func, delay) => {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
-    };
-  };
-
-  const handleResize =
-    debounce(() => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-    }, 500);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-
-  }, [handleResize])
-
+  const [count, setCount] = useState(0)
 
   return (
     <>
       <h1>Vite + React</h1>
-      <h1>{width}</h1>
-      <h1>{height}</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>/
+      </div>
     </>
   )
 }
